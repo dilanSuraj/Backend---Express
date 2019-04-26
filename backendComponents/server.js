@@ -66,13 +66,13 @@ todoRoutes.route('/update/:id').post(function (req, res) {
 
     Todo.findById(req.params.id, function (err, todo) {
         if (!todo) {
-            res.status(400).send('data not found');
+            res.status(404).send('data not found');
 
         } else {
-            todo_description = req.body.todo_description;
-            todo_responsible = req.body.todo_responsible;
-            todo_priority = req.body.todo_priority;
-            todo_completed = req.body.todo_completed;
+            todo.todo_description = req.body.todo_description;
+            todo.todo_responsible = req.body.todo_responsible;
+            todo.todo_priority = req.body.todo_priority;
+            todo.todo_completed = req.body.todo_completed;
 
             todo.save().then(todo => {
                 res.json('Todo updated');
